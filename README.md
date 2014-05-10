@@ -3,4 +3,4 @@ eSeNjsLinq
 
 LINQ (Language-Intergrated Query) lib for javascript.
 
-[API](doc/API/)
+[API](http://slavkonovak.github.io/eSeNjsLinq/doc/API/)
