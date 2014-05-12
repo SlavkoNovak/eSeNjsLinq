@@ -5,10 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eSeN jsLinq (API) documentation</title>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        #nav 
+        {
+            width: 300px;
+            float: left;
+            margin-right: 20px;
+        }
+        #content 
+        {
+            width: 450px;
+            float: left;    
+        }
+    </style>
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+        var bodyResize = function () {
+            var navBarWidth = 300;
+
+            if (window.innerWidth > 800) {
+                with ($("#nav")) {
+                    css("width", navBarWidth + "px");
+                    css("float", "left");
+                    css("margin-right", "20px");
+                }
+
+                with ($("#content")) {
+                    css("width", (window.innerWidth - navBarWidth - 70) + "px");
+                    css("float", "left");
+                }
+            }
+            else {
+                with ($("#nav")) {
+                    css("width", "100%");
+                    css("float", "none");
+                }
+
+                with ($("#content")) {
+                    css("width", "100%");
+                    css("float", "none");
+                }
+            }
+
+            consol.log(window.innerWidth);
+        };
+
+
         var fidl = '<iframe width="100%" height="80%" src="[URL]/embedded/js,result" allowfullscreen frameborder="0"></iframe>';
 
         var navContent = function (url) {
@@ -22,7 +65,7 @@
     </script>
 </head>
 
-<body>
+<body onresize="javascript:bodyResize();" onload="javascript:bodyResize();">
 
 	<div data-role="page">
     
@@ -32,12 +75,12 @@
     
         <div data-role="content">
             <ul id="nav" data-role="listview" data-inset="true">
-            	<li><a href="#content" onclick="javascript:navContent(fidlSelect);">Select</a></li>
-                <li><a href="#content" onclick="javascript:navContent(fidlWhere);">Where</a></li>
-                <li><a href="#content" onclick="javascript:navContent(fidlJoin);">Join</a></li>
+            	<li><a href="#content" onclick="javascript:navContent(fidlSelect);">Select(selectFunc)</a></li>
+                <li><a href="#content" onclick="javascript:navContent(fidlWhere);">Where(whereFunc)</a></li>
+                <li><a href="#content" onclick="javascript:navContent(fidlJoin);">Join(joinArray, leftName, rightName, joinFunc)</a></li>
             </ul>
 
-            <div id="content" data-role="content" style="height:80%;">
+            <div id="content" style="height:80%;">
                 <iframe width="100%" height="80%" src="http://jsfiddle.net/W94xY/embedded/js,result" allowfullscreen frameborder="0"></iframe>
             </div>
         </div>
