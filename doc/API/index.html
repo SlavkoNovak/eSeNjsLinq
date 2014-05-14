@@ -32,19 +32,25 @@
                 with ($("#nav")) {
                     css("width", navBarWidth + "px");
                     css("float", "left");
-                    //css("margin-right", "20px");
+                    css("margin-right", "20px");
+                }
+
+                with ($("#navDiv")) {
+                    css("width", navBarWidth + "px");
+                    css("float", "left");
+                    css("margin-right", "20px");
                 }
 
                 with ($("#content")) {
                     css("width", (window.innerWidth - navBarWidth - 70) + "px");
-                    css("height", (window.innerHeight - 152) + "px");
+                    css("height", (window.innerHeight - 144) + "px");
                     css("float", "left");
 
                     var top = $("#head").offset().top;
-                    offset({ "top": 78 + top, left: this.left });
+                    offset({ "top": 70 + top, left: this.left });
                 }
 
-                $("#cmdNavMenu").hide();
+                $("#contentSpliter").hide();
             }
             else {
                 orientation = "portrate";
@@ -55,13 +61,19 @@
                     //css("margin-right", "none");
                 }
 
+                with ($("#navDiv")) {
+                    css("width", "100%");
+                    css("float", "none");
+                    //css("margin-right", "none");
+                }
+
                 with ($("#content")) {
                     css("width", "100%");
                     css("float", "none");
-                    css("height", (window.innerHeight - 115) + "px");
+                    css("height", (window.innerHeight - 150) + "px");
                 }
 
-                $("#cmdNavMenu").show();
+                $("#contentSpliter").show();
             }
 
             console.log(window.innerWidth);
@@ -83,10 +95,11 @@
 
         var navContent = function (url) {
             $("#content").html(fidl.replace("[URL]", url));
+
             bodyResize();
-            console.log(orientation);
+
             if (orientation == "portrate") {
-                window.location.href = "#content";
+                window.location.href = "#contentSpliter";
             }
         };
 
@@ -102,10 +115,10 @@
     
         <div id="head" data-role="header" data-position="fixed">
             <h1>eSeN jsLinq (API) documentation</h1>
-            <a id="cmdNavMenu" data-role="button" href="#" data-icon="grid" data-iconpos="notext" onclick="javascript:location.href='#'"></a>
         </div>
         <div id="mainContent" data-role="content">
-            <ul id="nav" data-role="listview" data-inset="false">
+        <div id="navDiv">
+            <ul id="nav" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search method">
             	<li><a href="#content" onclick="javascript:navContent(fidlSelect);">Select(selectFunc)</a></li>
                 <li><a href="#content" onclick="javascript:navContent(fidlWhere);">Where(whereFunc)</a></li>
                 <li><a href="#content" onclick="javascript:navContent(fidlJoin);">Join(joinArray, leftName, rightName, joinFunc)</a></li>
@@ -131,7 +144,12 @@
                 <li><a href="#content" onclick="javascript:navContent(fidlJoin);">Func TBD</a></li>
                 <li><a href="#content" onclick="javascript:navContent(fidlJoin);">Func TBD</a></li>
             </ul>
-            <p><br /></p>
+            </div>
+            &nbsp<br />
+            <div id="contentSpliter" data-role="header">
+                <h3>Method:</h3>
+                <a id="cmdNavMenu" data-role="button" href="#" data-icon="grid" data-iconpos="notext" onclick="javascript:location.href='#'"></a>
+            </div>
             <div id="content">
                 <iframe width="100%" height="100%" src="http://jsfiddle.net/W94xY/embedded/js,result" allowfullscreen frameborder="0"></iframe>
             </div>
